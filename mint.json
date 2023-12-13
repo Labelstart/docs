@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Labelstart",
+  "name": "Labelstart Docs",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -20,32 +20,22 @@
     "name": "Dashboard",
     "url": "https://cms.labelst.art"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
+  "primaryTab": {
+    "name": "Documentation"
+  },
+  "tabs": [],
   "anchors": [],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
-    },
-    {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
-    },
-    {
-      "group": "Endpoint Examples",
+      "group": "Getting Started",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "introduction"
+      ]
+    },
+    {
+      "group": "Basics",
+      "pages": [
+        "documentation/cms/uploader/bulk-uploader"
       ]
     }
   ],
