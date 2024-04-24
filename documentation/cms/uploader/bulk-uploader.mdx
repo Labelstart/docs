@@ -34,5 +34,98 @@ To prevent your artwork from being rejected, please make sure that:
 </Accordion>
 
 <Accordion title="Creating the metaddata file">
+    <Info>The metadata file should always be named <strong>metadata</strong> like this: <strong>metadata.json</strong></Info>
 
+    ```json Example
+    {
+    "gtin": "", // Leave empty to generate
+    "title": "It's An Illusion", // Required
+    "version": "", // Leave empty for the original version
+    "record_label": "Somebody's Records", // Required
+    "release_date": "2024-05-01", // Format: YYYY-MM-DD
+    "language": "en", // ISO 639-1 code
+    "genres": {
+        "main": "Electronic", // Required
+        "secondary": "Instrumental" // Optional
+    },
+    "subgenres": {
+        "main": "Trance", // Optional
+        "secondary": "" // Optional
+    },
+    "artists": [
+        // At least one artist is required
+        {
+            "name": "Artist1",
+            "type": "Artist" // Artist, FeaturedArtist
+        },
+        {
+            "name": "Artist2",
+            "type": "FeaturedArtist"
+        }
+    ],
+    "tracks": [
+        // At least one track is required
+        {
+            "title": "It's An Illusion", // for single track releases, the title should be the same as the release title
+            "version": "", // Leave empty for the original version
+            "explicit": 0, // 0 = Not explicit, 1 = Explicit, 2 = Clean (Radio Edit)
+            "language": "zxx", // ISO 639-1 code or zxx for instrumental
+            "isrc": "US-ABC-01-00001", // Leave empty to generate - Format: CCXXXYYNNNNN or CC-XXX-YY-NNNNN-NN
+            "preview": 10, // Seconds into the track where the preview should start (TikTok, Instagram, etc.)
+            "songwriters": [
+                // At least one composer and lyricist (unless instrumental) is required
+                {
+                    "name": "Martin Hansen", // Composer and lyricist has to be a real full legal name
+                    "type": "Composer" // Composer, Lyricist, Producer, Remixer, Publisher
+                },
+                {
+                    "name": "Martin Hansen",
+                    "type": "Lyricist"
+                },
+                {
+                    "name": "GoodProducer Inc.",
+                    "type": "Producer"
+                }
+            ],
+            "artists": [
+                // Track artists are optional, same as release artists
+            ]
+        },
+        {
+            "title": "It's An Illusion",
+            "version": "CoolRemixerName Remix",
+            "explicit": 0,
+            "language": "zxx",
+            "isrc": "US-ABC-01-00002",
+            "preview": 10,
+            "songwriters": [
+                {
+                    "name": "Martin Hansen",
+                    "type": "Composer"
+                },
+                {
+                    "name": "Martin Hansen",
+                    "type": "Lyricist"
+                },
+                {
+                    "name": "CoolRemixerName",
+                    "type": "Producer"
+                },
+                {
+                    "name": "CoolRemixerName",
+                    "type": "Remixer" // Remixer is required for remixes, do not add in artists array
+                }
+            ],
+            "artists": []
+        }
+    ],
+    // Your customer/artist who owns the release
+    "user": {
+        "external_id": 5, // Your internal user ID, optional
+        "first_name": "Jonas", // Required
+        "last_name": "Madsen", // Required
+        "email": "jonas.vestergaard.madsen@gmail.com" // Required
+    }
+}
+    ```
 </Accordion>
