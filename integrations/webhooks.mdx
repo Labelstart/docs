@@ -1,0 +1,170 @@
+---
+title: Webhooks
+---
+
+You can use webhooks to receive notifications about events that happen in your account. For example, you can use webhooks to receive notifications when a release is created, edited, or deleted.
+
+## Creating a webhook
+
+To create a webhook, go to the **Integrations** page in the **Settings** section of your account. Click **Add webhook** and enter the name and URL of the webhook you want to create.
+
+## Configuring a webhook
+
+It's currently not possible to choose which events you want to receive notifications for. You will receive notifications for all events that are supported by the webhook.
+
+## Deleting a webhook
+
+To delete a webhook, go to the **Integrations** page in the **Settings** section of your account. Click the **Delete webhook** button next to the webhook you want to delete.
+
+## Webhook payload
+
+The payload of a webhook is a JSON object that contains information about the event that triggered the webhook. The payload will contain the following fields:
+
+- `token`: A unique identifier for the webhook that can be used to verify the authenticity of the webhook.
+- `type`: The type of event that triggered the webhook, such as `release.created`, `release.updated`, or `release.deleted`.
+- `request`: The payload of the request that triggered the webhook, such as metadata of the release that was created, updated, or deleted.
+
+Here is an example of a webhook payload:
+
+```json
+{
+    "token": "xxxxxx",
+    "type": "release.created",
+    "request": {
+        "data": {
+            "id":"30602",
+            "gtin":"",
+            "flags":[],
+            "label":{"name":"AJ-28132 Records","score":100},
+            "title":"Decaf",
+            "genres":{
+                "main":"Pop",
+                "secondary":"Alternative"
+            },
+            "splits":[
+                {
+                    "created":"2024-05-08 18:36:47.196805",
+                    "percentage":"100.0000000000000000",
+                    "externalUser":{
+                        "id":55084,
+                        "email":"xxxxxx",
+                        "lastName":"Allo",
+                        "firstName":"Martin"
+                    }
+                }
+            ],
+            "status":"Analyzing",
+            "tracks":{
+                "list":[
+                    {
+                        "id":62317,
+                        "num":1,
+                        "isrc":"",
+                        "audio":"https://api-beta.labelst.art/download?key=audio/1fa43f20e09b9d57f69c8852c7052ffb.wav",
+                        "title":"Decaf",
+                        "artists":[],
+                        "preview":106,
+                        "version":"",
+                        "explicit":0,
+                        "language":"en",
+                        "songwriters":[
+                            {
+                                "name":"Allo Martin",
+                                "type":"Composer"
+                            },
+                            {
+                                "name":"Allo Martin",
+                                "type":"Lyricist"
+                            },
+                            {
+                                "name":"Allo Martin",
+                                "type":"Producer"
+                            },
+                            {
+                                "name":"Cecillie Carpenter",
+                                "type":"Lyricist"
+                            }
+                        ],
+                        "language_full":"English"
+                    }
+                ],
+                "count":1
+            },
+            "actions":[],
+            "artists":{
+                "list":[
+                    {
+                        "name":"allo",
+                        "type":"Artist"
+                    },
+                    {
+                        "name":"bobby",
+                        "type":"Artist"
+                    }
+                ],
+                "displayArtist":"allo & bobby"
+            },
+            "artwork":{
+                "url":"xxxxxx",
+                "flags":[],
+                "score":null
+            },
+            "canEdit":true,
+            "canView":true,
+            "created":"2024-05-08 18:36:47.117772",
+            "exports":[],
+            "updated":"2024-05-08 18:36:47.2137",
+            "version":"",
+            "language":"en",
+            "metadata":{
+                "ai_mastering":0,
+                "ai_mastering_free":0,
+                "ai_mastering_paid":0,
+                "ls_exclude_beatport":true
+            },
+            "labelPage":false,
+            "subgenres":{
+                "main":"",
+                "secondary":""
+            },
+            "externalId":"0",
+            "externalUser":{
+                "id":55088,
+                "email":"xxxxxx",
+                "score":100,
+                "gravatar":"https://www.gravatar.com/avatar/xxxxxx?s=512&d=mp&r=r",
+                "lastName":"Farag",
+                "firstName":"Ali",
+                "externalId":28131
+            },
+            "organization":{
+                "id":1,
+                "logo":"",
+                "name":"Anti-Joy",
+                "owner":1,
+                "score":50
+            },
+            "release_date":"2024-05-08",
+            "conversations":[],
+            "deliveryNotes":null,
+            "language_full":"English",
+            "pendingUpdate":false,
+            "latest_version":"",
+            "pendingDelivery":false,
+            "pendingTakedown":false
+        }
+    }
+}
+```
+
+## Verifying a webhook
+
+To verify the authenticity of a webhook, you can send a `POST` request to the URL of the webhook with the `token` field of the payload as a POST field. The webhook should respond with a `200 OK` status code if the `token` is valid or a `401 Unauthorized` status code if the `token` is invalid.
+
+Here is an example of how to verify a webhook using `curl`:
+
+```bash
+curl -X POST
+    -H "Content-Type: application/json"
+    -d '{"token": "abc"}' https://api.labelst.art/webhook/verify
+```

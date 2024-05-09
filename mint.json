@@ -33,9 +33,16 @@
       ]
     },
     {
-      "group": "Basics",
+      "group": "CMS",
       "pages": [
-        "documentation/cms/uploader/bulk-uploader"
+        "cms/bulk-uploader"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/webhooks",
+        "integrations/custom-actions"
       ]
     }
   ],
